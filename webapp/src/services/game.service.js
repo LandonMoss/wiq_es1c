@@ -7,10 +7,10 @@ const startNewGame = async (token, tags) =>
     try {
       await axios.post(`${apiEndpoint}:8003/api/game/new`, { "token": token, "tags": tags });
 
-      return "";
+      return { error: null };
 
     } catch (error) {
-      return error.response.data.error;
+      return { error: error.response.data.error };
     }
 }
 
@@ -26,7 +26,7 @@ const getEndTime = async (token) =>
     };
 
   } catch (error) {
-    return undefined;
+    return { error: error.response.data.error };
   }
 }
 
@@ -38,7 +38,7 @@ const nextQuestion = async (token) =>
       return response.data;
 
     } catch (error) {
-      return error.response.data.error;
+      return { error: error.response.data.error };
     }
 }
 
@@ -50,7 +50,7 @@ const awnser = async (token, awnser) =>
       return response.data;
 
     } catch (error) {
-      return error.response.data.error;
+      return { error: error.response.data.error };
     }
 }
 
@@ -62,8 +62,10 @@ const getGameSettings = async (token) =>
     return response.data;
 
   } catch (error) {
-    return error.response.data.error;
+    return { error: error.response.data.error };
   }
 }
 
 export {startNewGame, nextQuestion, awnser, getEndTime, getGameSettings};
+
+ 
